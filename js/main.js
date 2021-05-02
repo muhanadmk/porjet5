@@ -4,33 +4,70 @@ async function getData(){
   const response = await fetch(api)
   const data = await response.json();
   printData(data)
- 
 }
+
 function printData(data){
-  const titile = document.querySelector('.card-title')
+ const cardPage = document.querySelector(".importJs");
+ cardPage.innerHTML = `
+  <div class="container">
+  <div class="row">
+    <div class="mt-5 col -sm-12 col-lg col-md-12">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+      <img src="${data[0].imageUrl}" class="img4 card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${data[0].name}</h5>
+          <p class="card-text">${data[0].description}</p>
+          <a href="#" class="btn btn-primary">découvrir</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 col-sm-12 col-lg col-md-12">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <img src="${data[1].imageUrl}" class="img2 card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${data[1].name}</h5>
+          <p class="card-text">${data[1].description}</p>
+          <a href="#" class="btn btn-primary">découvrir</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 col-sm-12 col-lg col-md-12">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <img src="${data[2].imageUrl}" class="img3 card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${data[2].name}</h5>
+          <p class="card-text">${data[2].description}</p>
+          <a href="#" class="btn btn-primary">découvrir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ <div class="container">
+  <div class="row"> 
+    <div class="mt-5 col-sm-12 col-lg col-md-12">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <img src="${data[3].imageUrl}" class="img4 card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${data[3].name}</h5>
+          <p class="card-text">${data[3].description}</p>
+          <a href="#" class="btn btn-primary">découvrir</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 col-sm-12 col-lg col-md-12">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <img src="${data[4].imageUrl}" class="img5 card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${data[4].name}</h5>
+          <p class="card-text">${data[4].description}consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+          <a href="#" class="btn btn-primary">découvrir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ `
 }
-// const print = data.map(m => m.name)
-// console.log(print);
+
 getData();
-
-// camera.then((response) => {
-
-// const cameraData = response.json();
-
-// const photo = cameraData.then((photo) =>{
-//   const urlImg = photo[3].imageUrl;
-//   const img2 = document.querySelector("img");
-//   const img3 = img2.setAttribute("src", urlImg);
-//   img2.innerHTML = img3;
-// }) 
-// })
-
-// const nameF = fetch('http://localhost:3000/api/cameras');
-// nameF.then(resp =>{
-//   resp.json()
-// const namef = resp.json();
-
-// const nameDa = namef.then(data => console.log(data[0].name));
-
-// })
-
