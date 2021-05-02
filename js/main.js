@@ -1,27 +1,36 @@
-const camera = fetch('http://localhost:3000/api/cameras');
+const api = "http://localhost:3000/api/cameras";
 
-camera.then((response) => {
-
-const cameraData = response.json();
-
-const photo = cameraData.then((photo) =>{
-  const urlImg = photo[3].imageUrl;
-  const img2 = document.querySelector("img");
-  const img3 = img2.setAttribute("src", urlImg);
-  img2.innerHTML = img3;
-}) 
-})
-
-// fetch('http://localhost:3000/api/cameras')
-//   .then(response => response.json())
-//   .then(json => {
-//     console.log(json)
-//     for (let i = 0; i < json.length; i++) {
-//       document.body.innerHTML += json[i].name 
-      
-//     }
-//   })
-
-for (i = 20; i > 1; i -= 1) {
-  console.log(i);
+async function getData(){
+  const response = await fetch(api)
+  const data = await response.json();
+  printData(data)
+ 
 }
+function printData(data){
+  const titile = document.querySelector('.card-title')
+}
+// const print = data.map(m => m.name)
+// console.log(print);
+getData();
+
+// camera.then((response) => {
+
+// const cameraData = response.json();
+
+// const photo = cameraData.then((photo) =>{
+//   const urlImg = photo[3].imageUrl;
+//   const img2 = document.querySelector("img");
+//   const img3 = img2.setAttribute("src", urlImg);
+//   img2.innerHTML = img3;
+// }) 
+// })
+
+// const nameF = fetch('http://localhost:3000/api/cameras');
+// nameF.then(resp =>{
+//   resp.json()
+// const namef = resp.json();
+
+// const nameDa = namef.then(data => console.log(data[0].name));
+
+// })
+
