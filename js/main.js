@@ -17,7 +17,7 @@ function printData(data){
         <div class="card-body">
           <h5 class="card-title">${data[0].name}</h5>
           <p class="card-text">${data[0].description}</p>
-          <a href="#" class="btn btn-primary">découvrir</a>
+          <a href="../htmlPage/zurs.html" class="btn btn-primary">découvrir</a>
         </div>
       </div>
     </div>
@@ -71,3 +71,4 @@ function printData(data){
 }
 
 getData();
+
