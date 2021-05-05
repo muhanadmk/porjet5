@@ -1,6 +1,5 @@
-// ----------------------Déclaration des variables ---------------------
-let i = [];
-let _id = []
+const i = [];
+let _id = [];
 let lenses = [];
 let name = [];
 let price = [];
@@ -52,7 +51,6 @@ const PositonMesProduite = document.querySelector(".MesProduite");
     </a>    
   `
   PositonMesProduite.innerHTML = structureProdoites;
-  // PositonMesProduite02.innerHTML = structureProdoites;
 
   }
 }
