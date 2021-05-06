@@ -23,21 +23,14 @@ const structureProdoite02 = `
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <img src="${data.imageUrl}" class="img5 card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">${data.name}</h5>
-            <p class="card-text">${data.description}consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-            <p>le price :${data.price} </p>
-            <button class="btn btn-primary mt-2" type="submit">Ajouter au panier</button>
-              <select class="mt-2 btn btn-primary" name="" id="">
-                  <option class="text-white" value="">
-                  ${data.lenses[0]}
-                  </option>
-                  <option class="text-white" value="">
-                  ${data.lenses[1]}
-                  </option>
-                  <option class="text-white" value="">
-                  ${data.lenses[2]}
-                  </option>
+            <h5 class="card-title text-center">${data.name}</h5>
+            <p class="card-text text-center">${data.description}</p>
+            <p class="text-center">le price :${data.price/ 100 + " €"} </p>
+            <button id="btnEnvoyer" class="btn btn-primary mt-2" type="submit">Ajouter au panier</button>
+            <form class="btn" action="">
+              <select id="Option_produite" class="mt-2 btn btn-primary text-center" name="Option_produite">
               </select>   
+            </form>  
           </div>
         </div>  
       </div>  
@@ -46,8 +39,62 @@ const structureProdoite02 = `
 `;
 
 potistionElement.innerHTML = structureProdoite02;
+ //----- Forme adapter aux nombres des option
+ const nombreDeOption = data.lenses;
+ 
+let optionStrcture = [];
+//  ---la boucle for afficher les donnes dans les options
+
+for (let v = 0; v < data.lenses.length; v++) {
+  optionStrcture = optionStrcture +
+  `
+  <option class="text-white" value="${v}">
+  ${data.lenses[v]}
+  </option>
+  
+  `
+}
+// ---- inserer le option html dans la page
+const potistionOptions = document.querySelector("#Option_produite");
+potistionOptions.innerHTML = optionStrcture;
+console.log(potistionOptions);
+
+// console.log(optionStrcture);
+// ------------ panier--------------------------------------------------------
+
+// ----------Recouper des donnes que l’utilisateur choisisse et les enovyer au panier --------------------
+
+// -------Selection de de l'id du form--------------------------------
+
+const idForm = document.querySelector("#Option_produite");
+const chixForm = idForm.value;
+console.log(chixForm);
+// ----Selection du button ajouter au panier
+
+const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
+
+
+// faire un event pour le btn
+btnEnvoyerPanier.addEventListener("click", (eventClick) => {
+  eventClick.preventDefault();
+
+let optionProduitePreso = {
+  nameProduite : data.name,
+  idDeproudite : leId,
+  priceProduite : data.price /100,
+  Option_produite : chixForm
+}
+
+ 
+console.log(optionProduitePreso);
+
+});
 
 }
 getDataProduites();
+
+
+
+
 
 
