@@ -25,10 +25,10 @@ const structureProdoite02 = `
           <div class="card-body">
             <h5 class="card-title text-center">${data.name}</h5>
             <p class="card-text text-center">${data.description}</p>
-            <p class="text-center">le price :${data.price/ 100 + " €"} </p>
+            <p class="text-center">le price : ${data.price/ 100 + "  €"} </p>
             <button id="btnEnvoyer" class="btn btn-primary mt-2" type="submit">Ajouter au panier</button>
             <form class="btn" action="">
-              <select id="Option_produite" class="mt-2 btn btn-primary text-center" name="Option_produite">
+              <select id="Option_produite" class="Option_produite mt-2 btn btn-primary text-center" name="Option_produite">
               </select>   
             </form>  
           </div>
@@ -45,19 +45,19 @@ potistionElement.innerHTML = structureProdoite02;
 let optionStrcture = [];
 //  ---la boucle for afficher les donnes dans les options
 
-for (let v = 0; v < data.lenses.length; v++) {
+for (let v = 0; v < nombreDeOption.length; v++) {
   optionStrcture = optionStrcture +
   `
   <option class="text-white" value="${v}">
-  ${data.lenses[v]}
+  ${nombreDeOption[v]}
   </option>
   
   `
 }
 // ---- inserer le option html dans la page
-const potistionOptions = document.querySelector("#Option_produite");
+const potistionOptions = document.querySelector(".Option_produite");
 potistionOptions.innerHTML = optionStrcture;
-console.log(potistionOptions);
+// console.log(potistionOptions);
 
 // console.log(optionStrcture);
 // ------------ panier--------------------------------------------------------
@@ -66,31 +66,74 @@ console.log(potistionOptions);
 
 // -------Selection de de l'id du form--------------------------------
 
-const idForm = document.querySelector("#Option_produite");
-const chixForm = idForm.value;
-console.log(chixForm);
+const chixForm = Option_produite.value;
+// console.log(chixForm);
+// const chixForm = idForm.value;
+
 // ----Selection du button ajouter au panier
 
 const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
 
 
-// faire un event pour le btn
+// faire un event pour le btn qui envyer les donnees
 btnEnvoyerPanier.addEventListener("click", (eventClick) => {
   eventClick.preventDefault();
 
+ 
 let optionProduitePreso = {
   nameProduite : data.name,
   idDeproudite : leId,
   priceProduite : data.price /100,
   Option_produite : chixForm
+};
+
+
+//  console.log(optionProduitePreso);
+
+// ----------------------------------------le local storage---------------------------------------------
+// ​ -----------Stocker la récupération des valeurs du formulaire dans le local storage--------------------------------
+
+// ici pour Transférer les forme josn ver objet js
+
+let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
+
+// JSON.parse(localStorage.getItem(optionProduitePreso));
+console.log(produitesDansLeLocalStorage);
+// ----message Conformations du Panier
+
+const alretConformationsPanier = () => {
+  if(window.confirm(`${data.name} option :${chixForm} a bien ete ajoute au panier 
+  Consulter le panier ou revenir ver page d’accueil `)) {
+   window.location.href = "panier.html";
+  }
+  else{
+    window.location.href = "index.html";
+  }
 }
 
- 
-console.log(optionProduitePreso);
+// ---Vérifier s’il y a des data dans le localstorge
+
+if (produitesDansLeLocalStorage) {
+  produitesDansLeLocalStorage = [];
+  produitesDansLeLocalStorage.push(optionProduitePreso);
+  localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
+   console.log(produitesDansLeLocalStorage);
+   alretConformationsPanier();
+
+}
+// ---s’il n'y a pas de data dans le localstorge
+
+else {
+  produitesDansLeLocalStorage = [];
+  produitesDansLeLocalStorage.push(optionProduitePreso);
+  localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
+  // console.log(produitesDansLeLocalStorage);
+}
 
 });
 
 }
+
 getDataProduites();
 
 
