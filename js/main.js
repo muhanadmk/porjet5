@@ -20,7 +20,7 @@ function AaffichageProduite(data){
 
 //  ----Positon mes produite -----
 
-const PositonMesProduite = document.querySelector(".MesProduite");
+const PositonMesProduite = document.querySelector(".mesProduite");
 //----la boucle for por afichage MesProduite
   for (let i = 0; i < data.length; i++) {
 
@@ -37,13 +37,13 @@ const PositonMesProduite = document.querySelector(".MesProduite");
     // ---------------afficher les donnes sur la page------------------------
     
   structureProdoites += `
-    <a class="text-decoration-none text-dark" href="../htmlPage/prouditeSelection.html?${_id[i]}">
-      <div class="mt-5 col-sm-12 col-lg col-md-12">
+    <a class="col-lg-4 text-decoration-none text-dark" href="../htmlPage/prouditeSelection.html?${_id[i]}">
+      <div class="">
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <img src="${imageUrl[i]}" class="img5 card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">${name[i]}</h5>
-            <p class="card-text">${description[i]}consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+            <p class="card-text">${description[i]}</p>
             <button class="btn btn-primary mt-2" type="submit">découvrir</button>
           </div>
         </div>  
