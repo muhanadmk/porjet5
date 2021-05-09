@@ -10,7 +10,7 @@ let structureProdoites = "";
 
 const api = "http://localhost:3000/api/cameras";
 async function getData(){
-  const response = await fetch(api)
+  const response = await fetch(api);
   const data = await response.json();
   AaffichageProduite(data)
 }
@@ -29,7 +29,7 @@ const PositonMesProduite = document.querySelector(".mesProduite");
     data.forEach ((element, i) => {
       _id[i] = element._id;
       name[i] = element.name;
-      price[i] = element.price;
+      // price[i] = element.price;
       description[i] = element.description;
       imageUrl[i] = element.imageUrl;
     });
@@ -51,7 +51,6 @@ const PositonMesProduite = document.querySelector(".mesProduite");
     </a>    
   `
   PositonMesProduite.innerHTML = structureProdoites;
-
   }
 }
 

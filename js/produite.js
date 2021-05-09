@@ -66,7 +66,7 @@ potistionOptions.innerHTML = optionStrcture;
 
 // -------Selection de de l'id du form--------------------------------
 
-const chixForm = Option_produite.value;
+// const chixForm = Option_produite.value;
 // console.log(chixForm);
 // const chixForm = idForm.value;
 
@@ -76,15 +76,16 @@ const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
 
 
 // faire un event pour le btn qui envyer les donnees
-btnEnvoyerPanier.addEventListener("click", (eventClick) => {
-  eventClick.preventDefault();
+btnEnvoyerPanier.addEventListener("click", (StockerDesDonnes) => {
+  StockerDesDonnes.preventDefault();
 
  
 let optionProduitePreso = {
   nameProduite : data.name,
-  idDeproudite : leId,
+  idDeProudite : leId,
   priceProduite : data.price /100,
-  Option_produite : chixForm
+  // Option_produite : chixForm
+  Quantite: 1,
 };
 
 
@@ -98,16 +99,16 @@ let optionProduitePreso = {
 let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
 
 // JSON.parse(localStorage.getItem(optionProduitePreso));
-console.log(produitesDansLeLocalStorage);
+// console.log(produitesDansLeLocalStorage);
 // ----message Conformations du Panier
 
 const alretConformationsPanier = () => {
-  if(window.confirm(`${data.name} option :${chixForm} a bien ete ajoute au panier 
+  if(window.confirm(`${data.name} a bien ete ajoute au panier 
   Consulter le panier ou revenir ver page d’accueil `)) {
-   window.location.href = "panier.html";
+   window.location.href = "../htmlPage/panier.html";
   }
   else{
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
   }
 }
 
@@ -127,7 +128,8 @@ else {
   produitesDansLeLocalStorage = [];
   produitesDansLeLocalStorage.push(optionProduitePreso);
   localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
-  // console.log(produitesDansLeLocalStorage);
+  alretConformationsPanier();
+  console.log(produitesDansLeLocalStorage);
 }
 
 });
