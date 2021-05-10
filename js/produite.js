@@ -84,6 +84,7 @@ let optionProduitePreso = {
   nameProduite : data.name,
   idDeProudite : leId,
   priceProduite : data.price /100,
+  imageProduite : data.imageUrl,
   // Option_produite : chixForm
   Quantite: 1,
 };

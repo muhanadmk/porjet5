@@ -28,8 +28,8 @@
    <!-- start header -->
 
    <header class="container ">
-     <h2 class="mb-5 text-center">les produite que je choisisse</h2>
-    <h3 class=" mb-5 text-center">Livraison dans tout la ftance gratuity</h3>
+     <!-- <h2 class="mb-5 text-center">les produite que je choisisse</h2> -->
+    <h1 class=" mb-5 text-center">Livraison gratuitit dans tout la france</h1>
   </header>
 
   <!-- end header -->
@@ -62,13 +62,20 @@
           <input type="email" class="form-control" id="inputEmail4">
         </div>
         <div class="col-md-10">
-          <label for="validationCustom03" class="form-label">City</label>
+          <label for="validationCustom03" class="form-label">address</label>
           <input type="text" class="form-control" id="validationCustom03" required>
+          <div class="invalid-feedback">
+            Please provide a valid address.
+          </div>
+        </div>
+        <div class="col-md-10">
+          <label for="validationCustom04" class="form-label">City</label>
+          <input type="text" class="form-control" id="validationCustom04" required>
           <div class="invalid-feedback">
             Please provide a valid city.
           </div>
         </div>
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-3">
           <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
       </form>
