@@ -29,6 +29,8 @@ const structureProdoite02 = `
             <button id="btnEnvoyer" class="btn btn-primary mt-2" type="submit">Ajouter au panier</button>
             <form class="btn" action="">
               <select id="Option_produite" class="Option_produite mt-2 btn btn-primary text-center" name="Option_produite">
+              </select>
+              <select id="Quantite_produite" class="Quantite_produite mt-2 btn btn-primary text-center" name="Quantite_produite">
               </select>   
             </form>  
           </div>
@@ -53,44 +55,55 @@ for (let v = 0; v < nombreDeOption.length; v++) {
   </option>
   
   `
-}
+};
 // ---- inserer le option html dans la page
 const potistionOptions = document.querySelector(".Option_produite");
 potistionOptions.innerHTML = optionStrcture;
-// console.log(potistionOptions);
 
-// console.log(optionStrcture);
+
+// Quantite : choisir les Quantité de les produites
+const structureQantite = `
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+`;
+
+const potistionQantite = document.querySelector("#Quantite_produite");
+potistionQantite.innerHTML = structureQantite;
+
+
 // ------------ panier--------------------------------------------------------
 
 // ----------Recouper des donnes que l’utilisateur choisisse et les enovyer au panier --------------------
 
 // -------Selection de de l'id du form--------------------------------
 
-// const chixForm = Option_produite.value;
-// console.log(chixForm);
-// const chixForm = idForm.value;
-
 // ----Selection du button ajouter au panier
 
 const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
 
 
-// faire un event pour le btn qui envyer les donnees
-btnEnvoyerPanier.addEventListener("click", (StockerDesDonnes) => {
-  StockerDesDonnes.preventDefault();
 
- 
+// faire un event pour le btn qui envyer les donnees
+// mettre les donnees dans un tableau
+
+btnEnvoyerPanier.addEventListener("click", (event) => {
+  event.preventDefault();
+
+ // Quantite : mettre la Quantite dans un variable
+const chixQuantite = potistionQantite.value;
+
+console.log(chixQuantite);
 let optionProduitePreso = {
   nameProduite : data.name,
   idDeProudite : leId,
-  priceProduite : data.price /100,
+  priceProduite : (data.price /100) * chixQuantite,
   imageProduite : data.imageUrl,
   // Option_produite : chixForm
-  Quantite: 1,
+  Quantite: chixQuantite,
 };
 
-
-//  console.log(optionProduitePreso);
 
 // ----------------------------------------le local storage---------------------------------------------
 // ​ -----------Stocker la récupération des valeurs du formulaire dans le local storage--------------------------------
@@ -99,8 +112,6 @@ let optionProduitePreso = {
 
 let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
 
-// JSON.parse(localStorage.getItem(optionProduitePreso));
-// console.log(produitesDansLeLocalStorage);
 // ----message Conformations du Panier
 
 const alretConformationsPanier = () => {
@@ -116,7 +127,6 @@ const alretConformationsPanier = () => {
 // ---Vérifier s’il y a des data dans le localstorge
 
 if (produitesDansLeLocalStorage) {
-  produitesDansLeLocalStorage = [];
   produitesDansLeLocalStorage.push(optionProduitePreso);
   localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
    console.log(produitesDansLeLocalStorage);
@@ -129,15 +139,18 @@ else {
   produitesDansLeLocalStorage = [];
   produitesDansLeLocalStorage.push(optionProduitePreso);
   localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
-  alretConformationsPanier();
   console.log(produitesDansLeLocalStorage);
+  alretConformationsPanier();
+  
 }
-
 });
 
 }
 
 getDataProduites();
+
+
+
 
 
 
