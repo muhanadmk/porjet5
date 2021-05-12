@@ -167,7 +167,7 @@ afichageFormulaireHtMl();
 const btnEnvoyerFormulaire = document.querySelector("#btn-Envoyer-Formulaire");
 
 /// quand on coick on envyer les donnes de formulaire
-// addEventListener
+// addEventListener  
 btnEnvoyerFormulaire.addEventListener("click", (e) => {
   e.preventDefault();
 // recupere les donnes de formulaire et les mettre dans le localStorage
@@ -176,7 +176,7 @@ const formulaireVlaeures = {
   Nom : ("Nom", document.querySelector("#Nom").value),
   Email : ("Email", document.querySelector("#Email").value),
   Address : ("Address", document.querySelector("#Address").value),
-  Ville : (document.querySelector("#Ville").value),
+  Ville : ("Ville", document.querySelector("#Ville").value),
 };
 
 //************************validation des donnes de formulaire pour qu'ils laissent passer *************/
@@ -184,7 +184,7 @@ const textAlert = (value) => {
 return `${value} : les chiffre et les syomboles ne sont pas autorisé et le minimum 3 lettre maximum 20 lettre`
 };
 const regExPrenomNomVilee = (value) => {
-  return /^[A-Za-z]{3,20}$/.test(value);
+  return /^[A-Za-z]{3,25}$/.test(value);
 };
 
 const regExAddress = (value) => {
@@ -268,6 +268,52 @@ const aEnvoyerAuServer  = {
   formulaireVlaeures,
 };
 
+// envoyer l'oject de aEnvoyerAuServer qui continet le donnes de formulairs et de l'arcticl que on choisisse
 
+  const promise01 = fetch("http://localhost:3000/api/cameras", {
+    method: 'POST',
+    body: JSON.stringify(aEnvoyerAuServer),
+    headers: { 
+  'Accept': 'application/json', 
+  'Content-Type': 'application/json' 
+  },
+  });
+
+  console.log("promise01");
+  console.log(promise01);
+
+  promise01.then(async(response) => {
+
+    try{
+      console.log("response");
+      console.log(response);
+
+      const content = await response.json();
+      console.log("content");
+      console.log(content);
+    }catch(e){
+      console.log(e);
+    }
+  })
+  const promise02 = fetch("http://localhost:3000/api/cameras")
+  promise02.then(async (response) =>{
+    try {
+      console.log("promise02");
+      console.log(promise02);
+      const donnesDEServer = response.json()
+      console.log("donnesDEServer");
+      console.log(donnesDEServer);
+    }
+    catch(e) {
+
+    }
+  })
+
+  // aller vers page de confromation de commande si conforme la demande
+  if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
+    window.location.href = "../htmlPage/confromation.html";
+  } else {
+    alert("veuillez bien remplier la formulaire");
+  };
 });
 
