@@ -81,7 +81,7 @@ btnViderLePanier.addEventListener("click", (s) => {
   
 alert("le panier a etait vidé")
   //rechargement de page du panier
-  window.location.href = "../htmlPage/panier.html";
+  window.location.href = "../panier.html";
 
 });
 // -------------------------------------fine de bt sipprimer Panier------------------
@@ -119,49 +119,6 @@ potistionPanier.insertAdjacentHTML("beforeend", afficherLePrixTotal);
 
 //*************************************la formularie de commande *********************************/
 
-const afichageFormulaireHtMl = () => {
-  //Selection ou on veut mettre la formulaire
-  const potistionFormulaire = document.querySelector("#Formulaire");
-  console.log(potistionFormulaire)
-  const structureFormulaire = 
-  `
-  <div class="container">
-  <form class="g-3 needs-validation" novalidate>
-    <div class="col-md-10">
-      <label for="Prenome" class="form-label">Prenome :</label>
-      <input type="text" class="form-control" id="Prenome" value="" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-10">
-      <label for="Nom" class="form-label">Nom :</label>
-      <input type="text" class="form-control" id="Nom" value="" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-10">
-      <label for="Email" class="form-label">Email :</label>
-      <input type="email" class="form-control" value="" id="Email">
-    </div>
-    <div class="col-md-10">
-      <label for="Address" class="form-label">Address :</label>
-      <input type="text" class="form-control" id="Address" required>
-    </div>
-    <div class="col-md-10">
-      <label for="Ville" class="form-label">Ville :</label>
-      <input type="text" class="form-control" id="Ville" required>
-    </div>
-    <div class="col-12 mt-3">
-      <button class="btn btn-primary" id="btn-Envoyer-Formulaire" type="submit">conformer la demande</button> 
-    </div>
-  </form>
-  `;
-
-  potistionFormulaire.insertAdjacentHTML("afterend", structureFormulaire);
-};
-afichageFormulaireHtMl();
 
 //------Selection de btn-Envoyer-Formulaire
 const btnEnvoyerFormulaire = document.querySelector("#btn-Envoyer-Formulaire");
@@ -183,12 +140,12 @@ const formulaireVlaeures = {
 const textAlert = (value) => {
 return `${value} : les chiffre et les syomboles ne sont pas autorisé et le minimum 3 lettre maximum 20 lettre`
 };
-const regExPrenomNomVilee = (value) => {
+const regExPrenomNom = (value) => {
   return /^[A-Za-z]{3,25}$/.test(value);
 };
 
-const regExAddress = (value) => {
-  return /^[A-Za-z0-9\s]{5,45}$/.test(value);
+const regExAddressVille = (value) => {
+  return /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/.test(value);
 };
 const regExEmail = (value) => {
   return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
@@ -198,7 +155,7 @@ function controlPrenom(){
   //control de prenome
   const lePrenom = formulaireVlaeures.Prenome;
 
-    if (regExPrenomNomVilee(lePrenom)) {
+    if (regExPrenomNom(lePrenom)) {
       return true;
     } else {
       alert(textAlert("prenom"));
@@ -210,7 +167,7 @@ function controlNom(){
   //control de Nom
   const leNom = formulaireVlaeures.Nom;
 
-    if (regExPrenomNomVilee(leNom)) {
+    if (regExPrenomNom(leNom)) {
       return true;
     } else {
       alert(textAlert("Nom"));
@@ -222,7 +179,7 @@ function controlVille(){
   //control de Ville
   const laVille = formulaireVlaeures.Ville;
 
-    if (regExPrenomNomVilee(laVille)) {
+    if (regExAddressVille(laVille)) {
       return true;
     } else {
       alert(textAlert("Ville"));
@@ -234,7 +191,7 @@ function controlAddress(){
   //control de Address
   const leAddress= formulaireVlaeures.Address;
 
-    if (regExAddress(leAddress)) {
+    if (regExAddressVille(leAddress)) {
       return true;
     } else {
       alert("l'address n'est pas validé");
@@ -263,55 +220,61 @@ if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && con
 
 // mettre les values du formulaire et mettre les produites Selectioné dans un objet a envoyer vers le server 
 
-const aEnvoyerAuServer  = {
-  produitesDansLeLocalStorage,
-  formulaireVlaeures,
+let products = [];
+//data des utilisateur qui a remplier la formulaire
+let conformeData =  JSON.stringify(localStorage.getItem("formulaire"));
+let prenom = conformeData.prenom;
+const contact = {
+  "firstName" : "muhanad",
+  "lastName" : "almokdad",
+  "address" : "rue de",
+  "city" : "nancy",
+  "email": "mouhandmk@gmail.com"
 };
+
+
+const basket = JSON.parse(localStorage.getItem("produite"));
+basket.forEach(item => {
+  products.push(item.idDeProudite);
+});
+
+//envoyer les formulaire et reveovoir le ID requête
+
+// function sendData(fetch('http://localhost:3000/api/cameras/order'),{
+//   method: 'POST',
+//   headers: {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({products, contact})
+// });
+  
+// const re = sendData.then(response => response.json());
+//  const data02 = re.then(data => console.log(data));
+
+//  (async () => {
+//   const rawResponse = await fetch('https://httpbin.org/post', {
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({a: 1, b: 'Textual content'})
+//   });
+//   const content = await rawResponse.json();
+
+//   console.log(content);
+// })();
+
+
+
 
 // envoyer l'oject de aEnvoyerAuServer qui continet le donnes de formulairs et de l'arcticl que on choisisse
 
-  const promise01 = fetch("http://localhost:3000/api/cameras", {
-    method: 'POST',
-    body: JSON.stringify(aEnvoyerAuServer),
-    headers: { 
-  'Accept': 'application/json', 
-  'Content-Type': 'application/json' 
-  },
-  });
-
-  console.log("promise01");
-  console.log(promise01);
-
-  promise01.then(async(response) => {
-
-    try{
-      console.log("response");
-      console.log(response);
-
-      const content = await response.json();
-      console.log("content");
-      console.log(content);
-    }catch(e){
-      console.log(e);
-    }
-  })
-  const promise02 = fetch("http://localhost:3000/api/cameras")
-  promise02.then(async (response) =>{
-    try {
-      console.log("promise02");
-      console.log(promise02);
-      const donnesDEServer = response.json()
-      console.log("donnesDEServer");
-      console.log(donnesDEServer);
-    }
-    catch(e) {
-
-    }
-  })
 
   // aller vers page de confromation de commande si conforme la demande
   if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
-    window.location.href = "../htmlPage/confromation.html";
+    window.location.href = "../confromation.html";
   } else {
     alert("veuillez bien remplier la formulaire");
   };

@@ -14,13 +14,13 @@
       <span class="navbar-toggler-icon text-white"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand text-white" href="../index.html">ORINOCO</a>
+      <a class="navbar-brand text-white" href="index.html">ORINOCO</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link text-white" href="../index.html">Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link text-white" href="index.html">Accueil <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="../htmlPage/panier.html">Panier</a>
+          <a class="nav-link text-white" href="panier.html">Panier</a>
         </li>
       </ul>
     </div>
@@ -41,7 +41,38 @@
   <!-- start form Produited-panier -->
 
   <section class="Produited-panier container" id="Formulaire">
-   
+    <div class="container">
+      <form class="g-3 needs-validation" novalidate>
+        <div class="col-md-10">
+          <label for="Prenome" class="form-label">Prenome :</label>
+          <input type="text" class="form-control" id="Prenome" value="" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-10">
+          <label for="Nom" class="form-label">Nom :</label>
+          <input type="text" class="form-control" id="Nom" value="" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-10">
+          <label for="Email" class="form-label">Email :</label>
+          <input type="email" class="form-control" value="" id="Email">
+        </div>
+        <div class="col-md-10">
+          <label for="Address" class="form-label">Address :</label>
+          <input type="text" class="form-control" id="Address" required>
+        </div>
+        <div class="col-md-10">
+          <label for="Ville" class="form-label">Ville :</label>
+          <input type="text" class="form-control" id="Ville" required>
+        </div>
+        <div class="col-12 mt-3">
+          <button class="btn btn-primary" id="btn-Envoyer-Formulaire" type="submit">Conformer</button> 
+        </div>
+      </form>
   </section>
   <!-- end  form Produited-panier -->
 

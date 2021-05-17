@@ -117,7 +117,7 @@ let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
 const alretConformationsPanier = () => {
   if(window.confirm(`${data.name} a bien ete ajoute au panier 
   Consulter le panier ou revenir ver page d’accueil `)) {
-   window.location.href = "../htmlPage/panier.html";
+   window.location.href = "../panier.html";
   }
   else{
     window.location.href = "../index.html";

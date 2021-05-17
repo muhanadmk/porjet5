@@ -29,7 +29,6 @@ const PositonMesProduite = document.querySelector(".mesProduite");
     data.forEach ((element, i) => {
       _id[i] = element._id;
       name[i] = element.name;
-      // price[i] = element.price;
       description[i] = element.description;
       imageUrl[i] = element.imageUrl;
     });
@@ -37,7 +36,7 @@ const PositonMesProduite = document.querySelector(".mesProduite");
     // ---------------afficher les donnes sur la page------------------------
     
   structureProdoites += `
-    <a class="col-lg-4 text-decoration-none text-dark" href="../htmlPage/prouditeSelection.html?${_id[i]}">
+    <a class="col-lg-4 text-decoration-none text-dark" href="../prouditeSelection.html?${_id[i]}">
       <div class="">
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <img src="${imageUrl[i]}" class="img5 card-img-top" alt="...">
