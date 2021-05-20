@@ -81,7 +81,7 @@ btnViderLePanier.addEventListener("click", (s) => {
   
 alert("le panier a etait vidé")
   //rechargement de page du panier
-  window.location.href = "../panier.html";
+  window.location.href = "panier.html";
 
 });
 // -------------------------------------fine de bt sipprimer Panier------------------
@@ -238,45 +238,22 @@ basket.forEach(item => {
   products.push(item.idDeProudite);
 });
 
-//envoyer les formulaire et reveovoir le ID requête
+  fetch("http://localhost:3000/api/cameras/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(products),
+  });
 
-// function sendData(fetch('http://localhost:3000/api/cameras/order'),{
-//   method: 'POST',
-//   headers: {
-//     'Accept': 'application/json',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({products, contact})
-// });
-  
-// const re = sendData.then(response => response.json());
-//  const data02 = re.then(data => console.log(data));
-
-//  (async () => {
-//   const rawResponse = await fetch('https://httpbin.org/post', {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({a: 1, b: 'Textual content'})
-//   });
-//   const content = await rawResponse.json();
-
-//   console.log(content);
-// })();
+// envoyer l'oject de contact et basket qui continet le donnes de formulairs et de l'arcticl que on choisisse
 
 
-
-
-// envoyer l'oject de aEnvoyerAuServer qui continet le donnes de formulairs et de l'arcticl que on choisisse
-
-
-  // aller vers page de confromation de commande si conforme la demande
-  if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
-    window.location.href = "../confromation.html";
-  } else {
-    alert("veuillez bien remplier la formulaire");
-  };
+  // // aller vers page de confromation de commande si conforme la demande
+  // if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
+  //   window.location.href = "../confromation.html";
+  // } else {
+  //   alert("veuillez bien remplier la formulaire");
+  // };
 });
 

@@ -36,7 +36,7 @@ const PositonMesProduite = document.querySelector(".mesProduite");
     // ---------------afficher les donnes sur la page------------------------
     
   structureProdoites += `
-    <a class="col-lg-4 text-decoration-none text-dark" href="../prouditeSelection.html?${_id[i]}">
+    <a class="col-lg-4 text-decoration-none text-dark" href="prouditeSelection.html?${_id[i]}">
       <div class="">
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <img src="${imageUrl[i]}" class="img5 card-img-top" alt="...">

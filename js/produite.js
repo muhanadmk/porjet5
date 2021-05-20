@@ -6,7 +6,7 @@ const leId = requeteChaine_url_id.slice(1);
 // ------------Récupérer des donnes api -----------
 let api01 = `http://localhost:3000/api/cameras/${leId}`;
 // -------Affichage des produites à partir des leurs id
-
+console.log(api01);
 async function getDataProduites(){
   const response = await fetch(api01)
   const data = await response.json(); 
@@ -117,7 +117,7 @@ let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
 const alretConformationsPanier = () => {
   if(window.confirm(`${data.name} a bien ete ajoute au panier 
   Consulter le panier ou revenir ver page d’accueil `)) {
-   window.location.href = "../panier.html";
+   window.location.href = "panier.html";
   }
   else{
     window.location.href = "../index.html";
