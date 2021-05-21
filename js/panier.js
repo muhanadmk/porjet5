@@ -129,11 +129,11 @@ btnEnvoyerFormulaire.addEventListener("click", (e) => {
   e.preventDefault();
 // recupere les donnes de formulaire et les mettre dans le localStorage
 const formulaireVlaeures = {
-  Prenome : ("Prenome", document.querySelector("#Prenome").value),
-  Nom : ("Nom", document.querySelector("#Nom").value),
-  Email : ("Email", document.querySelector("#Email").value),
-  Address : ("Address", document.querySelector("#Address").value),
-  Ville : ("Ville", document.querySelector("#Ville").value),
+  firstName : ("firstName", document.querySelector("#Prenome").value),
+  lastName : ("lastName", document.querySelector("#Nom").value),
+  email : ("email", document.querySelector("#Email").value),
+  address : ("address", document.querySelector("#Address").value),
+  city : ("city", document.querySelector("#Ville").value),
 };
 
 //************************validation des donnes de formulaire pour qu'ils laissent passer *************/
@@ -153,7 +153,7 @@ const regExEmail = (value) => {
 
 function controlPrenom(){
   //control de prenome
-  const lePrenom = formulaireVlaeures.Prenome;
+  const lePrenom = formulaireVlaeures.firstName;
 
     if (regExPrenomNom(lePrenom)) {
       return true;
@@ -165,7 +165,7 @@ function controlPrenom(){
 
 function controlNom(){
   //control de Nom
-  const leNom = formulaireVlaeures.Nom;
+  const leNom = formulaireVlaeures.lastName;
 
     if (regExPrenomNom(leNom)) {
       return true;
@@ -177,7 +177,7 @@ function controlNom(){
 
 function controlVille(){
   //control de Ville
-  const laVille = formulaireVlaeures.Ville;
+  const laVille = formulaireVlaeures.city;
 
     if (regExAddressVille(laVille)) {
       return true;
@@ -189,7 +189,7 @@ function controlVille(){
 
 function controlAddress(){
   //control de Address
-  const leAddress= formulaireVlaeures.Address;
+  const leAddress= formulaireVlaeures.address;
 
     if (regExAddressVille(leAddress)) {
       return true;
@@ -201,7 +201,7 @@ function controlAddress(){
 
 function controlEmail(){
   //control de Email
-  const leEmail= formulaireVlaeures.Email;
+  const leEmail= formulaireVlaeures.email;
 
     if (regExEmail(leEmail)) {
       return true;
@@ -210,50 +210,65 @@ function controlEmail(){
       return false;
     }
 };
+let produits = [];
+//data des utilisateur qui a remplier la formulaire
+let conformeData = localStorage.getItem("formulaire");
+const basket = JSON.parse(localStorage.getItem("produite"));
+basket.forEach(item => {
+  produits.push(item.idDeProudite);
+});
+const dataAenvoyer = {
+  products: produits,
+  contact:JSON.parse(conformeData)
+}
+// envoier le data de objet dataAenvoyer au server en utilaisant le fetch et methood post
+    const envoyerDataAuServer = async()=>{
+      const apiPost = await fetch('http://localhost:3000/api/cameras/order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataAenvoyer),
+      })
+      // recperr le ID de order quand on fait demmande de reuqite 
+      const recupereLeOrderID = await apiPost.json()
+
+      //Stoker le ID dans le local Storage
+      localStorage.setItem("IdResponse", recupereLeOrderID.orderId);
+      const stokerID = localStorage.getItem("IdResponse");
+      // if (stokerID) {
+      //   // aller vers page de confromation
+      //   window.location.href = "../porjet5/confromation.html";
+      // } else {
+      //   alert("IL y a une probleme dans le server");
+      // }
+      // console.log(recupereLeOrderID)
+     
+  }
+  envoyerDataAuServer()
 
 // ----------------fin de validation des donnes de formulaire pour qu'ils laissent passer---------
-if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
+if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille() && envoyerDataAuServer()) {
   localStorage.setItem("formulaire", JSON.stringify(formulaireVlaeures));
+  localStorage.setItem("prixTotla",JSON.stringify(prixtotal));
+  window.location.href = "../porjet5/confromation.html";
 } else {
   alert("veuillez bien remplier la formulaire");
 };
 
 // mettre les values du formulaire et mettre les produites Selectioné dans un objet a envoyer vers le server 
 
-let products = [];
-//data des utilisateur qui a remplier la formulaire
-let conformeData =  JSON.stringify(localStorage.getItem("formulaire"));
-let prenom = conformeData.prenom;
-const contact = {
-  "firstName" : "muhanad",
-  "lastName" : "almokdad",
-  "address" : "rue de",
-  "city" : "nancy",
-  "email": "mouhandmk@gmail.com"
-};
 
-
-const basket = JSON.parse(localStorage.getItem("produite"));
-basket.forEach(item => {
-  products.push(item.idDeProudite);
-});
-
-  fetch("http://localhost:3000/api/cameras/order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(products),
-  });
-
-// envoyer l'oject de contact et basket qui continet le donnes de formulairs et de l'arcticl que on choisisse
 
 
   // // aller vers page de confromation de commande si conforme la demande
   // if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
-  //   window.location.href = "../confromation.html";
+  //   // window.location.href = "../porjet5/confromation.html";
   // } else {
   //   alert("veuillez bien remplier la formulaire");
   // };
+
+//*****************************page de conformation****************************** */
+
 });
 

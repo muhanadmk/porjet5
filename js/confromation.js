@@ -1,32 +1,46 @@
-// ---decoration l'objet ou je trouver les valeurs des produites et la formulaire Dans Le LocalStorage
+//récupérer le Id server ou on trouve dans le local stroge
+const IdServer = localStorage.getItem("IdResponse");
 
-let formulaireDansLeLocalStorage = JSON.parse(localStorage.getItem("formulaire"));
-let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
-console.log(formulaireDansLeLocalStorage.Address);
+//récupérer le prix totla ou on trouve dans le local stroge
+const prixtotal = localStorage.getItem("prixTotla");
+
+//récupérer la data de formulaire ou on trouve dans le local stroge
+const formulaireDansLeLocalStorage = JSON.parse(localStorage.getItem("formulaire"));
+
+//  affichage la data dans le html conformation
 let structureConformationsHTML = [];
 const potistionConformation = document.querySelector("#confromation");
 
 
-for (N = 0; N < produitesDansLeLocalStorage.length; N++) {
-  console.log(formulaireDansLeLocalStorage.Address);
   structureConformationsHTML = 
   structureConformationsHTML +
    `
    <div class="row">
       <div class="col-2"></div>
-      <div class="card text-center col-8">
+      <div class="card text-center col-8 shadow p-3 bg-white rounded">
         <div class="card-body">
-          <h5 class="card-title">${produitesDansLeLocalStorage[N].nameProduite}</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <button href="#" class="btn btn-primary">Go somewhere</button>
+          <h4 class="card-title">l'équipe de notre site vous remercie et vous souhaite une excellente bonne journée</h4>
+            <h5 class="card-text text-success">le numeruo de commande est : ${IdServer}</h5>
+          <h5 class="card-text mt-20 text-primary">monsieur ${formulaireDansLeLocalStorage.lastName} votre commande sera envoyé dans la semaine suivante à l'adresse: <br />  ${formulaireDansLeLocalStorage.address} à la ville de ${formulaireDansLeLocalStorage.city} </h5>
+          <h5 class="card-text text-danger">le pirx totla de vos achete est :</h5>
+          <h4 class="card-text text-danger">${prixtotal} €</h4>
+          <h6 class="card-text mt-30"> Notre Protection de l'acheteur vous protège du premier clic à la livraison.</h6>
+          <h6>A toute heure, vous pouvez contacter le Centre d'Aide pour une expérience d'achat facile.</h6>
+          <h6>Payez avec les méthodes de paiement les plus populaires et les plus s?res au monde.</h6>
+          <a href="../porjet5/index.html" class="btn btn-primary mt-2">fermer</a>
         </div>
       </div>
     </div>  
   `;
   potistionConformation.innerHTML = structureConformationsHTML;
-}
 
-
+  //Supprimer le data de panier et prix et id Ordre dans le local Storage
+  function supprimerCleDeLoclalstorge (cle) {
+    localStorage.removeItem(cle);
+  }
+  supprimerCleDeLoclalstorge("prixTotla")
+  supprimerCleDeLoclalstorge("IdResponse")
+  supprimerCleDeLoclalstorge("produite")
 
 
 
