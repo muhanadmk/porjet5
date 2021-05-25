@@ -6,7 +6,7 @@ const leId = requeteChaine_url_id.slice(1);
 // ------------Récupérer des donnes api -----------
 let api01 = `http://localhost:3000/api/cameras/${leId}`;
 // -------Affichage des produites à partir des leurs id
-console.log(api01);
+
 async function getDataProduites(){
   const response = await fetch(api01)
   const data = await response.json(); 
@@ -83,27 +83,24 @@ potistionQantite.innerHTML = structureQantite;
 
 const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
 
-
-
 // faire un event pour le btn qui envyer les donnees
 // mettre les donnees dans un tableau
 
-btnEnvoyerPanier.addEventListener("click", (event) => {
-  event.preventDefault();
+  btnEnvoyerPanier.addEventListener("click", (event) => {
+    event.preventDefault();
 
- // Quantite : mettre la Quantite dans un variable
-const chixQuantite = potistionQantite.value;
+  // Quantite : mettre la Quantite dans un variable
+  const chixQuantite = potistionQantite.value;
 
-console.log(chixQuantite);
-let optionProduitePreso = {
-  nameProduite : data.name,
-  idDeProudite : leId,
-  priceProduite : (data.price /100) * chixQuantite,
-  imageProduite : data.imageUrl,
-  // Option_produite : chixForm
-  Quantite: chixQuantite,
-};
-
+ 
+  let optionProduitePreso = {
+    nameProduite : data.name,
+    idDeProudite : leId,
+    priceProduite : (data.price /100) * chixQuantite,
+    imageProduite : data.imageUrl,
+    // Option_produite : chixForm
+    Quantite: chixQuantite,
+  };
 
 // ----------------------------------------le local storage---------------------------------------------
 // ​ -----------Stocker la récupération des valeurs du formulaire dans le local storage--------------------------------
@@ -115,7 +112,7 @@ let produitesDansLeLocalStorage = JSON.parse(localStorage.getItem("produite"));
 // ----message Conformations du Panier
 
 const alretConformationsPanier = () => {
-  if(window.confirm(`${data.name} a bien ete ajoute au panier 
+  if(window.confirm(`${data.name} a bien été ajoute au panier 
   Consulter le panier ou revenir ver page d’accueil `)) {
    window.location.href = "../porjet5/panier.html";
   }
@@ -126,23 +123,37 @@ const alretConformationsPanier = () => {
 
 // ---Vérifier s’il y a des data dans le localstorge
 
+let proudictExsist 
 if (produitesDansLeLocalStorage) {
-  produitesDansLeLocalStorage.push(optionProduitePreso);
-  localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
-   console.log(produitesDansLeLocalStorage);
-   alretConformationsPanier();
-
+  proudictExsist = produitesDansLeLocalStorage.find((el)=>el.idDeProudite==optionProduitePreso.idDeProudite);
 }
-// ---s’il n'y a pas de data dans le localstorge
 
-else {
-  produitesDansLeLocalStorage = [];
-  produitesDansLeLocalStorage.push(optionProduitePreso);
-  localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
-  console.log(produitesDansLeLocalStorage);
-  alretConformationsPanier();
+if (proudictExsist) {
+  proudictExsist.priceProduite =(parseInt(proudictExsist.priceProduite)*parseInt(proudictExsist.Quantite)) + parseInt(optionProduitePreso.priceProduite);
+  proudictExsist.Quantite = parseInt (proudictExsist.Quantite) + parseInt(optionProduitePreso.Quantite);
+  if (produitesDansLeLocalStorage) {
+    // produitesDansLeLocalStorage.push(proudictExsist);
+    console.log(produitesDansLeLocalStorage);
+    localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
+     alretConformationsPanier();
+  }
+}else{
+  if (produitesDansLeLocalStorage)  {
+    optionProduitePreso.priceProduite = parseInt(optionProduitePreso.priceProduite)
+    produitesDansLeLocalStorage.push(optionProduitePreso);
+    localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
+     alretConformationsPanier();
+  }
+  // ---s’il n'y a pas de data dans le localstorge
   
+  else {
+    produitesDansLeLocalStorage = [];
+    produitesDansLeLocalStorage.push(optionProduitePreso);
+    localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
+    alretConformationsPanier();
+  }
 }
+
 });
 
 }

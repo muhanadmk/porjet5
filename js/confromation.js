@@ -8,10 +8,10 @@ const prixtotal = localStorage.getItem("prixTotla");
 const formulaireDansLeLocalStorage = JSON.parse(localStorage.getItem("formulaire"));
 
 //  affichage la data dans le html conformation
-let structureConformationsHTML = [];
+
 const potistionConformation = document.querySelector("#confromation");
 
-  structureConformationsHTML = 
+ let  structureConformationsHTML = 
    `
     <div class="row">
         <div class="col-2"></div>
@@ -24,8 +24,7 @@ const potistionConformation = document.querySelector("#confromation");
             <h4 class="card-text text-danger">${prixtotal} €</h4>
             <h6 class="card-text mt-30"> Notre Protection de l'acheteur vous protège du premier clic à la livraison.</h6>
             <h6>A toute heure, vous pouvez contacter le Centre d'Aide pour une expérience d'achat facile.</h6>
-            <h6>Payez avec les méthodes de paiement les plus populaires et les plus s?res au monde.</h6>
-            <a href="../porjet5/index.html" class="btn btn-primary mt-2" id="click">fermer</a>
+            <a href="../porjet5/index.html" class="btn btn-primary mt-2" id="removeLoclalSrorge">fermer</a>
           </div>
         </div>
       </div>  
@@ -33,14 +32,15 @@ const potistionConformation = document.querySelector("#confromation");
   potistionConformation.innerHTML = structureConformationsHTML;
 
   //Supprimer le data de panier et prix et id Ordre dans le local Storage
+  
+ 
+ 
+
+
   function supprimerCleDeLoclalstorge (cle) {
     localStorage.removeItem(cle);
-  }
-  supprimerCleDeLoclalstorge("prixTotla")
+  };
+  
+ supprimerCleDeLoclalstorge("prixTotla")
   supprimerCleDeLoclalstorge("IdResponse")
   supprimerCleDeLoclalstorge("produite")
-
-
-
-
-
