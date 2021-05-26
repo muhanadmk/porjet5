@@ -10,7 +10,6 @@ let api01 = `http://localhost:3000/api/cameras/${leId}`;
 async function getDataProduites(){
   const response = await fetch(api01)
   const data = await response.json(); 
-  
 // ------------------Affichage des produites à partir des leurs id---------
   const potistionElement = document.querySelector(".Produited");
 
@@ -122,14 +121,13 @@ const alretConformationsPanier = () => {
 }
 
 // ---Vérifier s’il y a des data dans le localstorge
-
+// ajouter une condition pour ne pas répéter la produit et récupérer la quantité et la prix
 let proudictExsist 
 if (produitesDansLeLocalStorage) {
   proudictExsist = produitesDansLeLocalStorage.find((el)=>el.idDeProudite==optionProduitePreso.idDeProudite);
 }
-
 if (proudictExsist) {
-  proudictExsist.priceProduite =(parseInt(proudictExsist.priceProduite)*parseInt(proudictExsist.Quantite)) + parseInt(optionProduitePreso.priceProduite);
+  proudictExsist.priceProduite =(parseInt(proudictExsist.priceProduite)* parseInt(proudictExsist.Quantite)) + parseInt(optionProduitePreso.priceProduite);
   proudictExsist.Quantite = parseInt (proudictExsist.Quantite) + parseInt(optionProduitePreso.Quantite);
   if (produitesDansLeLocalStorage) {
     // produitesDansLeLocalStorage.push(proudictExsist);
@@ -145,7 +143,6 @@ if (proudictExsist) {
      alretConformationsPanier();
   }
   // ---s’il n'y a pas de data dans le localstorge
-  
   else {
     produitesDansLeLocalStorage = [];
     produitesDansLeLocalStorage.push(optionProduitePreso);

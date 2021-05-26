@@ -40,6 +40,7 @@
       </section>
       <!-- start form Produited-panier -->
 
+  
       <section class="Produited-panier container" id="Formulaire">
         <div class="container">
           <form class="g-3 needs-validation" novalidate>
@@ -49,6 +50,12 @@
               <div class="valid-feedback">
                 Looks good!
               </div>
+              <div class="alert alert-warning alert-dismissible fade show text-center d-none" id="displayPrenom" role="alert">
+                <strong>les chiffre et les syomboles ne sont pas autorisé et le minimum 3 lettre maximum 20 lettre</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="col-md-10">
               <label for="Nom" class="form-label">Nom :</label>
@@ -56,18 +63,42 @@
               <div class="valid-feedback">
                 Looks good!
               </div>
+              <div class="alert alert-warning alert-dismissible fade show text-center d-none" id="displayNom" role="alert">
+                <strong>les chiffre et les syomboles ne sont pas autorisé et le minimum 3 lettre maximum 20 lettre</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="col-md-10">
               <label for="Email" class="form-label">Email :</label>
               <input type="email" class="form-control" value="" id="Email">
+              <div class="alert alert-warning alert-dismissible fade show text-center d-none" id="displayEmail" role="alert">
+                <strong>le e-email ne pas vlaide</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="col-md-10">
               <label for="Address" class="form-label">Address :</label>
               <input type="text" class="form-control" id="Address" required>
+              <div class="alert alert-warning alert-dismissible fade show text-center d-none" id="displayAddress" role="alert">
+                <strong>villeuez bien remplie l'addrerss</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="col-md-10">
               <label for="Ville" class="form-label">Ville :</label>
               <input type="text" class="form-control" id="Ville" required>
+              <div class="alert alert-warning alert-dismissible fade show text-center d-none" id="displayVille" role="alert">
+                <strong>ecrir bien votre nom de ville</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="col-12 mt-3">
               <button class="btn btn-primary" id="btn-Envoyer-Formulaire" type="submit">Conformer</button> 

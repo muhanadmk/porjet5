@@ -7,12 +7,18 @@ let m = 0;
 // Selection la class ou je vais mettre mes code html
 const potistionPanier = document.querySelector("#Produited-panier");
 let structureProdoitesPanier = [];
+
 // si la panier est vide : afficher la panier est vide a
 if (produitesDansLeLocalStorage === null ||produitesDansLeLocalStorage == 0) {
   const panierVide = `
-  <div class="container-panier-vide">
-    <h1 class="text-center bg-danger text-white">le panier est vide</h1>
+  <div class="container">
+  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+    <h4><strong>le panier à été vidé</strong></h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+</div>
   `;
   potistionPanier.innerHTML = panierVide;
 
@@ -78,9 +84,7 @@ btnViderLePanier.addEventListener("click", (s) => {
   localStorage.removeItem("produite");
 
   // alret le panier est vide en ce meomente
-  
-alert("le panier a etait vidé")
-  //rechargement de page du panier
+
   window.location.href = "panier.html";
 
 });
@@ -137,9 +141,7 @@ const formulaireVlaeures = {
 };
 
 //************************validation des donnes de formulaire pour qu'ils laissent passer *************/
-const textAlert = (value) => {
-return `${value} : les chiffre et les syomboles ne sont pas autorisé et le minimum 3 lettre maximum 20 lettre`
-};
+
 const regExPrenomNom = (value) => {
   return /^[A-Za-z]{3,25}$/.test(value);
 };
@@ -158,7 +160,7 @@ function controlPrenom(){
     if (regExPrenomNom(lePrenom)) {
       return true;
     } else {
-      alert(textAlert("prenom"));
+      document.getElementById("displayPrenom").className += "d-block";
       return false;
     }
 };
@@ -170,7 +172,7 @@ function controlNom(){
     if (regExPrenomNom(leNom)) {
       return true;
     } else {
-      alert(textAlert("Nom"));
+      document.getElementById("displayNom").className += "d-block";
       return false;
     }
 };
@@ -182,7 +184,7 @@ function controlVille(){
     if (regExAddressVille(laVille)) {
       return true;
     } else {
-      alert(textAlert("Ville"));
+      document.getElementById("displayVille").className += "d-block";
       return false;
     }
 };
@@ -194,7 +196,7 @@ function controlAddress(){
     if (regExAddressVille(leAddress)) {
       return true;
     } else {
-      alert("l'address n'est pas validé");
+      document.getElementById("displayAddress").className += "d-block";
       return false;
     }
 };
@@ -206,7 +208,7 @@ function controlEmail(){
     if (regExEmail(leEmail)) {
       return true;
     } else {
-      alert("le Email n'est pas validé");
+      document.getElementById("displayEmail").className += "d-block";
       return false;
     }
 };
@@ -236,13 +238,6 @@ const dataAenvoyer = {
       //Stoker le ID dans le local Storage
       localStorage.setItem("IdResponse", recupereLeOrderID.orderId);
       const stokerID = localStorage.getItem("IdResponse");
-      // if (stokerID) {
-      //   // aller vers page de confromation
-      //   window.location.href = "../porjet5/confromation.html";
-      // } else {
-      //   alert("IL y a une probleme dans le server");
-      // }
-      // console.log(recupereLeOrderID)
      
   }
   envoyerDataAuServer()
@@ -253,22 +248,10 @@ if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && con
   localStorage.setItem("prixTotla",JSON.stringify(prixtotal));
   window.location.href = "../porjet5/confromation.html";
 } else {
-  alert("veuillez bien remplier la formulaire");
+  // alert("veuillez bien remplier la formulaire");
 };
 
 // mettre les values du formulaire et mettre les produites Selectioné dans un objet a envoyer vers le server 
-
-
-
-
-  // // aller vers page de confromation de commande si conforme la demande
-  // if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille()) {
-  //   // window.location.href = "../porjet5/confromation.html";
-  // } else {
-  //   alert("veuillez bien remplier la formulaire");
-  // };
-
-//*****************************page de conformation****************************** */
 
 });
 
