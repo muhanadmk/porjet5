@@ -10,18 +10,7 @@ let structureProdoitesPanier = [];
 
 // si la panier est vide : afficher la panier est vide a
 if (produitesDansLeLocalStorage === null ||produitesDansLeLocalStorage == 0) {
-  const panierVide = `
-  <div class="container">
-  <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-    <h4><strong>le panier à été vidé</strong></h4>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-</div>
-  `;
-  potistionPanier.innerHTML = panierVide;
-
+  const panierVide = document.getElementById("dispalyVIde").className += "d-block"; 
 } else {
   //si la panier n'est pas vide; afficher les produites 
 
@@ -63,9 +52,7 @@ if (produitesDansLeLocalStorage === null ||produitesDansLeLocalStorage == 0) {
       //injecter html dans la page du panier
       potistionPanier.innerHTML = structureProdoitesPanier;
     }
-}
-
-
+    
 // ----------------------------------------btn supprimer le panier----------------
 // selection le btn de supprimer
 
@@ -89,6 +76,9 @@ btnViderLePanier.addEventListener("click", (s) => {
 
 });
 // -------------------------------------fine de bt sipprimer Panier------------------
+}
+
+
 
 //---- -----------------------------------le montant total de prix de panier-----------------
 let lePrixTotal = [];
@@ -248,7 +238,7 @@ if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && con
   localStorage.setItem("prixTotla",JSON.stringify(prixtotal));
   window.location.href = "../porjet5/confromation.html";
 } else {
-  // alert("veuillez bien remplier la formulaire");
+  document.getElementById("displayAddress").className += "d-block";
 };
 
 // mettre les values du formulaire et mettre les produites Selectioné dans un objet a envoyer vers le server 
