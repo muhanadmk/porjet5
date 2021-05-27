@@ -75,7 +75,6 @@ potistionQantite.innerHTML = structureQantite;
 // ------------ panier--------------------------------------------------------
 
 // ----------Recouper des donnes que l’utilisateur choisisse et les enovyer au panier --------------------
-
 // -------Selection de de l'id du form--------------------------------
 
 // ----Selection du button ajouter au panier
@@ -87,11 +86,9 @@ const btnEnvoyerPanier = document.querySelector("#btnEnvoyer");
 
   btnEnvoyerPanier.addEventListener("click", (event) => {
     event.preventDefault();
-
   // Quantite : mettre la Quantite dans un variable
   const chixQuantite = potistionQantite.value;
 
- 
   let optionProduitePreso = {
     nameProduite : data.name,
     idDeProudite : leId,

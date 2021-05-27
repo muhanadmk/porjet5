@@ -222,16 +222,19 @@ const dataAenvoyer = {
       })
       // recperr le ID de order quand on fait demmande de reuqite 
       const recupereLeOrderID = await apiPost.json()
-
-      //Stoker le ID dans le local Storage
-      localStorage.setItem("IdResponse", recupereLeOrderID.orderId);
-      const stokerID = localStorage.getItem("IdResponse");
-     
+      if (recupereLeOrderID) {
+        //Stoker le ID dans le local Storage
+        localStorage.setItem("IdResponse", recupereLeOrderID.orderId);
+        const stokerID = localStorage.getItem("IdResponse");
+        return true; 
+      } else {
+        return false;
+      }
   }
   envoyerDataAuServer()
 
 // ----------------fin de validation des donnes de formulaire pour qu'ils laissent passer---------
-if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille() && envoyerDataAuServer()) {
+if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && controlVille() && envoyerDataAuServer(Boolean)) {
   localStorage.setItem("formulaire", JSON.stringify(formulaireVlaeures));
   localStorage.setItem("prixTotla",JSON.stringify(prixtotal));
   window.location.href = "../porjet5/confromation.html";

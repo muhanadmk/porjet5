@@ -17,24 +17,18 @@ async function getData(){
 // ------------------Fonction pour afficher les donnes automatismes -------------
 
 function AaffichageProduite(data){
-
 //  ----Positon mes produite -----
-
 const PositonMesProduite = document.querySelector(".mesProduite");
 //----la boucle for por afichage MesProduite
   for (let i = 0; i < data.length; i++) {
-
-    // mettre les donnes dans des variables ----
-
+    // mettre les donnes dans des variables ---
     data.forEach ((element, i) => {
       _id[i] = element._id;
       name[i] = element.name;
       description[i] = element.description;
       imageUrl[i] = element.imageUrl;
     });
-    
     // ---------------afficher les donnes sur la page------------------------
-    
   structureProdoites += `
     <a class="col-lg-4 text-decoration-none text-dark" href="prouditeSelection.html?${_id[i]}">
       <div class="">
@@ -52,5 +46,4 @@ const PositonMesProduite = document.querySelector(".mesProduite");
   PositonMesProduite.innerHTML = structureProdoites;
   }
 }
-
 getData();

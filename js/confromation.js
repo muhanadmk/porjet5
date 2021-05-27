@@ -1,16 +1,11 @@
 //récupérer le Id server ou on trouve dans le local stroge
 const IdServer = localStorage.getItem("IdResponse");
-
 //récupérer le prix totla ou on trouve dans le local stroge
 const prixtotal = localStorage.getItem("prixTotla");
-
 //récupérer la data de formulaire ou on trouve dans le local stroge
 const formulaireDansLeLocalStorage = JSON.parse(localStorage.getItem("formulaire"));
-
 //  affichage la data dans le html conformation
-
 const potistionConformation = document.querySelector("#confromation");
-
  let  structureConformationsHTML = 
    `
     <div class="row">
@@ -30,17 +25,10 @@ const potistionConformation = document.querySelector("#confromation");
       </div>  
   `;
   potistionConformation.innerHTML = structureConformationsHTML;
-
   //Supprimer le data de panier et prix et id Ordre dans le local Storage
-  
- 
- 
-
-
   function supprimerCleDeLoclalstorge (cle) {
     localStorage.removeItem(cle);
   };
-  
  supprimerCleDeLoclalstorge("prixTotla")
   supprimerCleDeLoclalstorge("IdResponse")
   supprimerCleDeLoclalstorge("produite")
