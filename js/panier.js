@@ -70,8 +70,6 @@ btnViderLePanier.addEventListener("click", (s) => {
   //vider le locl stroge en utilisatant removeIteme 
   localStorage.removeItem("produite");
 
-  // alret le panier est vide en ce meomente
-
   window.location.href = "panier.html";
 
 });
@@ -238,7 +236,7 @@ if (controlPrenom() && controlNom() && controlEmail() && controlAddress() && con
   localStorage.setItem("prixTotla",JSON.stringify(prixtotal));
   window.location.href = "../porjet5/confromation.html";
 } else {
-  document.getElementById("displayAddress").className += "d-block";
+  document.getElementById("remplieFormumlaire").className += "d-block";
 };
 
 // mettre les values du formulaire et mettre les produites Selectioné dans un objet a envoyer vers le server 

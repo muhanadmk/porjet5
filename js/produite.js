@@ -131,7 +131,6 @@ if (proudictExsist) {
   proudictExsist.Quantite = parseInt (proudictExsist.Quantite) + parseInt(optionProduitePreso.Quantite);
   if (produitesDansLeLocalStorage) {
     // produitesDansLeLocalStorage.push(proudictExsist);
-    console.log(produitesDansLeLocalStorage);
     localStorage.setItem("produite", JSON.stringify(produitesDansLeLocalStorage));
      alretConformationsPanier();
   }
